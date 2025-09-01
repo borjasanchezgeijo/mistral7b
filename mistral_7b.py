@@ -4,9 +4,12 @@ llm = Llama(
     model_path="/Users/borjasanchez/llama.cpp/models/mistral-7b-instruct-v0.2.Q4_K_M.gguf",
     n_ctx=2048,
     n_threads=6,
-    n_gpu_layers=-1
+    n_gpu_layers=-1,
+    verbose=False
 )
 
-output = llm("Where is Tokyo?", max_tokens=20)
+prompt = input("How can I help you today?").strip()
 
-print(output["choices"][0]["text"].strip())
+output = llm(prompt, max_tokens=40)
+
+print("\033[91m" + output["choices"][0]["text"].strip() + "\033[0m")
